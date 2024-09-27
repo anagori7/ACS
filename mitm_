@@ -1,0 +1,18 @@
+# udp_client.py
+import socket
+
+# Client settings
+UDP_IP = "10.0.0.2"  # IP of Host 2 (the server)
+UDP_PORT = 12345      # Port the server is listening on
+MESSAGE = "Hello from Host 1 (Client)"
+
+# Create a UDP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+
+# Send the message to the server
+print(f"Sending message to {UDP_IP}:{UDP_PORT}")
+sock.sendto(MESSAGE.encode(), (UDP_IP, UDP_PORT))
+
+# Receive the response from the server
+data, server = sock.recvfrom(1024)  # Buffer size is 1024 bytes
+print(f"Received response: {data.decode()}")
